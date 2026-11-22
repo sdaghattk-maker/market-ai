@@ -4,6 +4,8 @@ from datetime import datetime, timezone
 from pathlib import Path
 
 import google.generativeai as genai
+from curl_cffi import requests
+import yfinance as yf
 import yfinance as yf
 
 ROOT = Path(__file__).resolve().parent
