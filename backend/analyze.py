@@ -4,7 +4,7 @@ from datetime import datetime, timezone
 from pathlib import Path
 
 import requests
-import google.generativeai as genai
+from google import genai
 
 ROOT = Path(__file__).resolve().parent
 CONFIG = json.loads((ROOT / "config.json").read_text(encoding="utf-8"))
@@ -64,9 +64,12 @@ def main():
     if not payload:
         raise SystemExit("No market data fetched from Twelve Data.")
 
-    genai.configure(api_key=os.environ["GEMINI_API_KEY"])
-    model = genai.GenerativeModel("gemini-2.0-flash")
-    resp = model.generate_content(build_prompt(payload, CONFIG["language"]))
+    client = genai.Client(api_key=os.environ["GEMINI_API_KEY"])
+
+    resp = client.models.generate_content(
+        model="gemini-3.8-flash",
+        contents=build_prompt(payload, CONFIG["language"]),
+    )
 
     OUT.parent.mkdir(parents=True, exist_ok=True)
     OUT.write_text(
