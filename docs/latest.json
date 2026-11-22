@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-11-22T21:35:28.949539+00:00",
-  "analysis": "متأسفانه تحلیل هوش مصنوعی در این لحظه امکان‌پذیر نیست. خطا: 'ServerError' object has no attribute 'status_code'",
+  "generated_at": "2026-11-22T21:42:11.387684+00:00",
+  "analysis": "متأسفانه تحلیل هوش مصنوعی در این لحظه امکان‌پذیر نیست. خطا: 503 UNAVAILABLE. {'error': {'code': 503, 'message': 'This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.', 'status': 'UNAVAILABLE'}}",
   "raw": {
     "SPY": {
       "label": "S&P 500 (ETF)",
