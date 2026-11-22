@@ -1,1 +1,48 @@
-{}
+{
+  "generated_at": "2026-11-22T21:35:28.949539+00:00",
+  "analysis": "متأسفانه تحلیل هوش مصنوعی در این لحظه امکان‌پذیر نیست. خطا: 'ServerError' object has no attribute 'status_code'",
+  "raw": {
+    "SPY": {
+      "label": "S&P 500 (ETF)",
+      "data": {
+        "last_close": 689.81,
+        "change_pct_5d": -6.78,
+        "closes": [
+          739.95,
+          732.44,
+          730.2,
+          715.87,
+          689.81
+        ]
+      }
+    },
+    "QQQ": {
+      "label": "NASDAQ (ETF)",
+      "data": {
+        "last_close": 608.45,
+        "change_pct_5d": -8.05,
+        "closes": [
+          661.75,
+          656.95,
+          659.51,
+          645.04,
+          608.45
+        ]
+      }
+    },
+    "DIA": {
+      "label": "Dow Jones (ETF)",
+      "data": {
+        "last_close": 481.08,
+        "change_pct_5d": -6.71,
+        "closes": [
+          515.68,
+          507.31,
+          501.73,
+          490.79,
+          481.08
+        ]
+      }
+    }
+  }
+}
