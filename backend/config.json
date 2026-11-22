@@ -1,9 +1,9 @@
 {
   "indices": [
-    {"symbol": "^GSPC", "label": "S&P 500"},
-    {"symbol": "^IXIC", "label": "NASDAQ"},
-    {"symbol": "^DJI",  "label": "Dow Jones"},
-    {"symbol": "^N225", "label": "Nikkei 225"}
+    {"symbol": "SPY", "label": "S&P 500 (ETF)"},
+    {"symbol": "QQQ", "label": "NASDAQ (ETF)"},
+    {"symbol": "DIA", "label": "Dow Jones (ETF)"},
+    {"symbol": "N225", "label": "Nikkei 225"}
   ],
   "period": "5d",
   "interval": "1d",
