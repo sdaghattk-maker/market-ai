@@ -13,11 +13,10 @@ CONFIG = json.loads((ROOT / "config.json").read_text(encoding="utf-8"))
 OUT = ROOT.parent / "docs" / "latest.json"
 API_KEY = os.environ.get("TWELVE_DATA_API_KEY")
 
-# --- تنظیمات تلاش مجدد و مدل جایگزین ---
 PRIMARY_MODEL = "gemini-3.8-flash"
 FALLBACK_MODEL = "gemini-3.5-flash-lite"
 MAX_RETRIES = 3
-INITIAL_DELAY = 2  # ثانیه
+INITIAL_DELAY = 2
 
 def fetch(symbol):
     url = (
@@ -63,7 +62,6 @@ def build_prompt(payload, lang):
     )
 
 def generate_with_retry(client, prompt):
-    """تولید محتوا با تلاش مجدد و مدل جایگزین در صورت خطای 503"""
     for attempt in range(MAX_RETRIES):
         try:
             print(f"Attempt {attempt + 1} with model: {PRIMARY_MODEL}")
@@ -73,19 +71,18 @@ def generate_with_retry(client, prompt):
             )
             return response.text
         except errors.ServerError as e:
-            # فقط برای خطای 503 (سرویس در دسترس نیست) تلاش مجدد می‌کنیم
-            if e.status_code == 503:
-                delay = INITIAL_DELAY * (2 ** attempt)  # 2, 4, 8 ثانیه
+            # تغییر کلیدی: استفاده از e.code به جای e.status_code
+            if e.code == 503:
+                delay = INITIAL_DELAY * (2 ** attempt)
                 print(f"503 UNAVAILABLE. Retrying in {delay} seconds...")
                 time.sleep(delay)
             else:
-                raise  # سایر خطاهای سرور را دوباره پرتاب می‌کنیم
+                raise
         except Exception as e:
             print(f"Unexpected error: {e}")
             raise
 
-    # اگر همه تلاش‌ها با مدل اصلی ناموفق بود، از مدل جایگزین استفاده می‌کنیم
-    print(f"Primary model failed after {MAX_RETRIES} attempts. Trying fallback model: {FALLBACK_MODEL}")
+    print(f"Primary model failed after {MAX_RETRIES} attempts. Trying fallback: {FALLBACK_MODEL}")
     try:
         response = client.models.generate_content(
             model=FALLBACK_MODEL,
@@ -112,7 +109,6 @@ def main():
     try:
         analysis_text = generate_with_retry(client, prompt)
     except Exception as e:
-        # در صورت شکست کامل، یک پیام خطای قابل فهم در فایل خروجی می‌نویسیم
         analysis_text = f"متأسفانه تحلیل هوش مصنوعی در این لحظه امکان‌پذیر نیست. خطا: {e}"
 
     OUT.parent.mkdir(parents=True, exist_ok=True)
