@@ -12,10 +12,9 @@ OUT = ROOT.parent / "docs" / "latest.json"
 API_KEY = os.environ.get("TWELVE_DATA_API_KEY")
 
 def fetch(symbol):
-    clean_symbol = symbol.replace("^", "")
     url = (
         f"https://api.twelvedata.com/time_series"
-        f"?symbol={clean_symbol}&interval=1day&outputsize=5&apikey={API_KEY}"
+        f"?symbol={symbol}&interval=1day&outputsize=5&apikey={API_KEY}"
     )
     try:
         response = requests.get(url, timeout=15)
