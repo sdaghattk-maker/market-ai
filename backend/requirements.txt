@@ -1,2 +1,4 @@
 requests
 google-genai
+tenacity
+groq
