@@ -1,3 +1,4 @@
+API_KEY = os.environ.get("TWELVE_DATA_API_KEY")
 import json
 import os
 from datetime import datetime, timezone
